@@ -1,7 +1,7 @@
 import express from 'express';
 import pool from '../utils/db.js';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt'
+
 const router = express.Router();
 
 router.post("/adminlogin", (req, res) => {
@@ -54,12 +54,11 @@ router.post('/addemployee', (req, res) => {
         }
 
         const sqlInsertEmployee = `INSERT INTO employee (name, email, password, salary, address, department_id) VALUES ($1, $2, $3, $4, $5, $6)`;
-        bcrypt.hash(req.body.password, 10, (err, hash) => {
-            if (err) return res.json({ Status: false, Error: "Hashing Error" });
+       
             const values = [
                 req.body.name,
                 req.body.email,
-                hash,
+                req.body.passwrord,
                 req.body.salary,
                 req.body.address,
                 req.body.category_id
@@ -68,7 +67,7 @@ router.post('/addemployee', (req, res) => {
                 if (err) return res.json({ Status: false, Error: err });
                 return res.json({ Status: true });
             });
-        });
+        
     });
 });
 
