@@ -4,7 +4,7 @@ const {Pool}=pg;
 // Create a connection pool
     const pool = new Pool({
     user: 'utkarshp',
-    host: 'dpg-co2g47ol6cac73bn1lhg-a',
+    host: 'dpg-co2g47ol6cac73bn1lhg-a.oregon-postgres.render.com',
     database: 'employeedb_ppp1',
     password: 'parsHDupSQDVRxYTNJnG3lGfOOQeoN8k',
     port: 5432, // Default PostgreSQL port
