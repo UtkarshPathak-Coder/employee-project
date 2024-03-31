@@ -58,7 +58,7 @@ router.post('/addemployee', (req, res) => {
             const values = [
                 req.body.name,
                 req.body.email,
-                req.body.passwrord,
+                req.body.password,
                 req.body.salary,
                 req.body.address,
                 req.body.category_id
