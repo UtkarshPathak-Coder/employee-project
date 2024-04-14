@@ -16,7 +16,7 @@ const Login = () => {
 
     const handleSubmit=(event)=>{
         event.preventDefault()
-        axios.post('http://localhost:3000/auth/adminlogin', values)
+        axios.post('http://10.16.2.95:3000/auth/adminlogin', values)
         .then(result=>{
             if(result.data.loginStatus){
             navigate('/Dashboard')}
