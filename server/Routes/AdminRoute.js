@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/adminlogin", (req, res) => {
     const sql = "SELECT * FROM admin WHERE email=$1 AND password=$2";
+    console.log("/adminlogin reached!")
     pool.query(sql, [req.body.email, req.body.password], (err, result) => {
         if (err) return res.json({ loginStatus: false, Error: "query error" });
         if (result.rows.length > 0) {

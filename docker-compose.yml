@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Frontend service
+  employeedb:
+    build:
+      context: ./employeeDB
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"  # Adjust the port mapping as needed
+    networks:
+      - app-network
+
+  # Backend service
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Adjust the port mapping as needed
+    depends_on:
+      - database
+    networks: 
+      - app-network
+
+  # PostgreSQL service
+  database:
+    image: my-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: employeedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

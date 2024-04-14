@@ -3,10 +3,10 @@ const {Pool}=pg;
  
 // Create a connection pool
     const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
+    user: 'myuser',
+    host: 'database',
     database: 'employeedb',
-    password: '12345',
+    password: 'mypassword',
     port: 5432, // Default PostgreSQL port
 });
  
