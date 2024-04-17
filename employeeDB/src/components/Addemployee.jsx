@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal'; 
 import { useNavigate } from 'react-router-dom';
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const AddEmployee = ({ onClose }) => {
     const [employee, setEmployee] = useState({
         name: '',
@@ -16,7 +16,7 @@ const AddEmployee = ({ onClose }) => {
     const [category, setCategory] = useState([]);
     const [duplicateEmailError, setDuplicateEmailError] = useState('');
     useEffect(() => {
-        axios.get('http://10.16.2.95:3000/auth/Category')
+        axios.get(`${API_URL}/auth/Category`)
             .then(result => {
                 if (result.data.Status) {
                     setCategory(result.data.Result);
@@ -31,7 +31,7 @@ const AddEmployee = ({ onClose }) => {
         e.preventDefault();
         const lowercaseEmail = employee.email.toLowerCase();
         setEmployee({ ...employee, email: lowercaseEmail });
-        axios.post('http://10.16.2.95:3000/auth/addemployee', employee)
+        axios.post(`${API_URL}/auth/addemployee`, employee)
             .then(result => {
                 if (result.data.Status) {
                     window.location.reload()

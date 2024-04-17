@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Modal from 'react-modal'
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Addcategory = ({ onClose }) =>{
     const [category,setCategory]=useState()
     const navigate=useNavigate()
@@ -10,7 +10,7 @@ const Addcategory = ({ onClose }) =>{
         e.preventDefault()
         
         const capitalizedCategory = category.toUpperCase()
-        axios.post('http://localhost:3000/auth/Addcategory',{category: capitalizedCategory})
+        axios.post(`${API_URL}/auth/Addcategory`, {category: capitalizedCategory})
         .then(result=>{
             if(result.data.Status){
                 window.location.reload()

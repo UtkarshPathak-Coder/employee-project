@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Modal from 'react-modal'
 import Addcategory from './Addcategory'
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Category = () => {
     const [category,setCategory]=useState([])
     const [showmodal,setshowModal]=useState(false);
     useEffect(()=>{
-    axios.get('http://localhost:3000/auth/Category')
+    axios.get(`${API_URL}/auth/Category`)
     .then(result=>{
         if(result.data.Status)
         {

@@ -3,11 +3,13 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AddEmployee from './Addemployee'
 
+const API_URL = import.meta.env.VITE_APP_API_URL;
+
 const Employee = () => {
     const[employee,setEmployee]=useState([])
     const [showmodal,setshowModal]=useState(false);
     useEffect(()=>{
-        axios.get('http://localhost:3000/auth/employee')
+        axios.get(`${API_URL}/auth/employee`)
         .then(result=>{
             if(result.data.Status)
             {
@@ -21,7 +23,7 @@ const Employee = () => {
     const navigate=useNavigate()
     
     const handleDelete=(id)=>{
-        axios.delete('http://localhost:3000/auth/delete_employee/'+id)
+        axios.delete(`${API_URL}/auth/delete_employee/`+id)
         .then(result=>{
             if (result.data.Status){
                 window.location.reload()

@@ -2,12 +2,12 @@ import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const Dashboard = () => {
     const navigate=useNavigate()
     axios.defaults.withCredentials=true
     const handleLogout=()=>{
-        axios.get("http://localhost:3000/auth/logout")
+        axios.get(`${API_URL}/auth/logout`)
         .then(result=> {
             if(result.data.Status)
             {

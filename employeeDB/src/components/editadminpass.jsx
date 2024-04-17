@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const EditadminPass = () => {
     const { id } = useParams();
     const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ const EditadminPass = () => {
             return;
         }
 
-        axios.put(`http://localhost:3000/auth/edit_adminpass/${id}`, { password })
+        axios.put(`${API_URL}/auth/edit_adminpass/${id}`, { password })
             .then(result => {
                 if (result.data.Status) {
                     navigate('/dashboard');

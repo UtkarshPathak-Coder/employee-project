@@ -14,9 +14,10 @@ const Login = () => {
     const navigate=useNavigate()
     axios.defaults.withCredentials=true
 
+    const API_URL = import.meta.env.VITE_APP_API_URL;
     const handleSubmit=(event)=>{
         event.preventDefault()
-        axios.post('http://10.16.2.95:3000/auth/adminlogin', values)
+        axios.post(`${API_URL}/auth/adminlogin`, values)
         .then(result=>{
             if(result.data.loginStatus){
             navigate('/Dashboard')}

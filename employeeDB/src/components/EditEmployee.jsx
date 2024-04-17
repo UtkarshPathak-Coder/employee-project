@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const EditEmployee = () => {
     const{id}=useParams()
     const [employee, setEmployee] = useState(
@@ -15,7 +15,7 @@ const EditEmployee = () => {
         });
         const [category,setCategory]=useState([])
         useEffect(()=>{
-            axios.get('http://localhost:3000/auth/Category')
+            axios.get(`${API_URL}/auth/Category`)
             .then(result=>{
                 if(result.data.Status)
                 {
@@ -25,7 +25,7 @@ const EditEmployee = () => {
                     alert(result.data.Error)
                 }
             }).catch(err=>console.log(err))
-            axios.get('http://localhost:3000/auth/employee/'+id)
+            axios.get(`${API_URL}/auth/employee/`+id)
             .then(result=>{
                 setEmployee({
                     ...employee,
@@ -41,7 +41,7 @@ const EditEmployee = () => {
             const navigate=useNavigate()
     const handleSubmit =(e)=>{
         e.preventDefault();
-        axios.put('http://localhost:3000/auth/edit_employee/'+id,employee)
+        axios.put(`${API_URL}/auth/edit_employee/`+id, employee)
         .then(result=>
             {
                 if(result.data.Status){
