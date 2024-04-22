@@ -25,7 +25,7 @@ services:
 
   
   database:
-    image: db
+    image: utkarshpathak26/employeeproj-db:latest
     restart: always
     environment:
       POSTGRES_USER: myuser
