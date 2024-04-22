@@ -1,31 +1,31 @@
 version: '3.8'
 
 services:
-  # Frontend service
-  employeedb:
+ 
+  frontend:
     build:
-      context: ./employeeDB
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"  # Adjust the port mapping as needed
+      - "5173:5173"  
     networks:
       - app-network
 
-  # Backend service
-  server:
+  
+  backend:
     build:
-      context: ./server
+      context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"  # Adjust the port mapping as needed
+      - "3000:3000"  
     depends_on:
       - database
     networks: 
       - app-network
 
-  # PostgreSQL service
+  
   database:
-    image: my-postgers
+    image: db
     restart: always
     environment:
       POSTGRES_USER: myuser
