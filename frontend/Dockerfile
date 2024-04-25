@@ -8,7 +8,7 @@ RUN npm i
 
 
 
-## EXPOSE [Port you mentioned in the vite.config file]
+
 
 EXPOSE 5173
 
