@@ -13,35 +13,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-    
+      # Build and push backend Docker image
       - name: Build and push backend Docker image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
         run: |
           cd backend
           docker build -t utkarshpathak26/backend .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo $DOCKER_ACCESS_TOKEN | docker login --username $DOCKER_USERNAME --password-stdin
           docker push utkarshpathak26/backend
 
-      
+      # Build and push Database Docker image
       - name: Build and push Database Docker image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
         run: |
           cd Database
           docker build -t utkarshpathak26/database .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo $DOCKER_ACCESS_TOKEN | docker login --username $DOCKER_USERNAME --password-stdin
           docker push utkarshpathak26/database
 
       # Build and push frontend Docker image
       - name: Build and push frontend Docker image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
         run: |
           cd frontend
           docker build -t utkarshpathak26/frontend .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo $DOCKER_ACCESS_TOKEN | docker login --username $DOCKER_USERNAME --password-stdin
           docker push utkarshpathak26/frontend
