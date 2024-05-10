@@ -18,20 +18,20 @@ jobs:
       - name: Build and push backend Docker image
         run: |
           cd backend
-          echo "${{ secrets.DOCKERPW }}" | docker login --u "utkarshpathak26" --password-stdin
+          echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
           docker build -t utkarshpathak26/backend .
           docker push utkarshpathak26/backend
 
       - name: Build and push database Docker image
         run: |
           cd Database
-          echo "${{ secrets.DOCKERPW }}" | docker login --u "utkarshpathak26" --password-stdin
+          echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
           docker build -t utkarshpathak26/database_g .
           docker push utkarshpathak26/database_g
           
       - name: Build and push frontend Docker image
         run: |
           cd frontend
-          echo "${{ secrets.DOCKERPW }}" | docker login --u "utkarshpathak26" --password-stdin
+          echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
           docker build -t utkarshpathak26/frontend .
           docker push utkarshpathak26/frontend
