@@ -1,0 +1,40 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Set up date tag
+        id: vars
+        run: echo "IMAGE_TAG=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+      
+      - name: Build and push backend Docker image
+        run: |
+          cd backend
+          echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
+          docker build -t utkarshpathak26/backend:${{ env.IMAGE_TAG }} .
+          docker push utkarshpathak26/backend:${{ env.IMAGE_TAG }}
+
+      - name: Build and push database Docker image
+        run: |
+          cd Database
+          echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
+          docker build -t utkarshpathak26/database_g:${{ env.IMAGE_TAG }} .
+          docker push utkarshpathak26/database_g:${{ env.IMAGE_TAG }}
+          
+      - name: Build and push frontend Docker image
+        run: |
+          cd frontend
+          echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
+          docker build -t utkarshpathak26/frontend:${{ env.IMAGE_TAG }} .
+          docker push utkarshpathak26/frontend:${{ env.IMAGE_TAG }}
