@@ -22,8 +22,8 @@ jobs:
         uses: azure/docker-login@v1
         with:
           login-server: utkarshpathakacr.azurecr.io
-          username: ${{ secrets.AZURE_ACR_USERNAME }}
-          password: ${{ secrets.AZURE_ACR_PASSWORD }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.AACR_SECRET }}
 
       - name: Build and push backend Docker image
         run: |
