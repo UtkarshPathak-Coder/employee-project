@@ -23,7 +23,7 @@ jobs:
         with:
           login-server: utkarshpathakacr.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.AACR_SECRET }}
+          password: ${{ secrets.ACR_SECRET }}
 
       - name: Build and push backend Docker image
         run: |
