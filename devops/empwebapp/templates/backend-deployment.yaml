@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: utkarshpathak26/employeeproj-server:v4.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PG_HOST
+          value: database
+        - name: PG_USER
+          value: myuser
+        - name: PG_PASSWORD
+          value: mypassword
+        - name: PG_DATABASE
+          value: employeedb
