@@ -27,7 +27,7 @@ jobs:
 
       - name: Build and push database Docker image
         run: |
-          cd Database
+          cd database
           echo "${{ secrets.DOCKERPW }}" | docker login --username "utkarshpathak26" --password-stdin
           docker build -t utkarshpathak26/database_g:${{ env.IMAGE_TAG }} .
           docker push utkarshpathak26/database_g:${{ env.IMAGE_TAG }}
