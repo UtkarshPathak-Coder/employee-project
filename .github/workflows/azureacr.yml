@@ -33,7 +33,7 @@ jobs:
 
       - name: Build and push database Docker image
         run: |
-          cd Database
+          cd database
           docker build -t utkarshpathakacr.azurecr.io/database_g:${{ env.IMAGE_TAG }} .
           docker push utkarshpathakacr.azurecr.io/database_g:${{ env.IMAGE_TAG }}
 
