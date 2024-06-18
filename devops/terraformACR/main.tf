@@ -1,11 +1,6 @@
 data "azurerm_resource_group" "existing" {
-  name = "Utkarsh-Pathak-rg"  # Replace with your existing resource group name
+  name = "Utkarsh-Pathak-rg"  
 }
-#resource "azurerm_resource_group" "main" {
-#  name     = data.azurerm_resource_group.existing.name
-#  location = var.location
-#  
-#}
 
 resource "azurerm_container_registry" "main" {
   name                = var.acr_name
