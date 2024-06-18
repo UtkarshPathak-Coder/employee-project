@@ -1,15 +1,15 @@
 terraform {
   required_providers {
     docker = {
-      source  = "kreuzwerker/docker"  # Update to the correct provider source
-      version = "~> 2.13"  # Specify the version constraint if needed
+      source  = "kreuzwerker/docker" 
+      version = "~> 2.13" 
     }
   }
 }
 provider "azurerm" {
   features {}
   skip_provider_registration = true
-  # Add other provider configuration here as needed
+  
 }
 
 provider "docker" {
