@@ -10,6 +10,7 @@ variable "acr_name" {
   default     = "acrutkterraform"
 }
 
+
 variable "subscription_id" {
   description = "The Azure subscription ID"
   type        = string
