@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: utkarshpathak26/employeeproj-server:v4.0
+        image: utkarshpathak26/backend:20240618092509
         ports:
         - containerPort: 3000
         env:
