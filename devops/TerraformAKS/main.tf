@@ -96,7 +96,6 @@ variable "vm_size" {
   type        = string
   default     = "Standard_DS2_v2"
 }
-
 output "kube_config" {
   value     = data.azurerm_kubernetes_cluster.aks.kube_config_raw
   sensitive = true
