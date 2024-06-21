@@ -1,8 +1,3 @@
-provider "azurerm" {
-  features {}
-  skip_provider_registration = true
-}
-
 data "azurerm_resource_group" "existing" {
   name = "Utkarsh-Pathak-rg" 
 }
@@ -35,12 +30,6 @@ data "azurerm_kubernetes_cluster" "aks" {
   depends_on = [azurerm_kubernetes_cluster.aks]
 }
 
-provider "kubernetes" {
-  host                   = data.azurerm_kubernetes_cluster.aks.kube_config.0.host
-  client_certificate     = base64decode(data.azurerm_kubernetes_cluster.aks.kube_config.0.client_certificate)
-  client_key             = base64decode(data.azurerm_kubernetes_cluster.aks.kube_config.0.client_key)
-  cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.aks.kube_config.0.cluster_ca_certificate)
-}
 
 resource "local_file" "kubeconfig" {
   content  = data.azurerm_kubernetes_cluster.aks.kube_config_raw
@@ -50,7 +39,7 @@ resource "local_file" "kubeconfig" {
 resource "null_resource" "apply_k8s_manifests" {
   provisioner "local-exec" {
     command = <<EOT
-    kubectl apply -f ${path.module}/../empwebapp/templates/postgres-service.yaml --kubeconfig=${path.module}/kubeconfig   && kubectl apply -f ${path.module}/../empwebapp/templates/postgres-statefulsets.yaml --kubeconfig=${path.module}/kubeconfig  && kubectl apply -f ${path.module}/../empwebapp/templates/pvc-service.yaml --kubeconfig=${path.module}/kubeconfig &&  kubectl apply -f ${path.module}/../empwebapp/templates/backend-deployment.yaml --kubeconfig=${path.module}/kubeconfig &&      kubectl apply -f ${path.module}/../empwebapp/templates/backend-service.yaml --kubeconfig=${path.module}/kubeconfig    &&      kubectl apply -f ${path.module}/../empwebapp/templates/frontend-deployment.yaml --kubeconfig=${path.module}/kubeconfig   &&       kubectl apply -f ${path.module}/../empwebapp/templates/frontend-service.yaml --kubeconfig=${path.module}/kubeconfig  
+     kubectl apply -f ${path.module}/../empwebapp/templates/postgres-statefulsets.yaml --kubeconfig=${path.module}/kubeconfig && kubectl apply -f ${path.module}/../empwebapp/templates/postgres-service.yaml --kubeconfig=${path.module}/kubeconfig   &&  kubectl apply -f ${path.module}/../empwebapp/templates/pvc-service.yaml --kubeconfig=${path.module}/kubeconfig &&  kubectl apply -f ${path.module}/../empwebapp/templates/backend-deployment.yaml --kubeconfig=${path.module}/kubeconfig &&      kubectl apply -f ${path.module}/../empwebapp/templates/backend-service.yaml --kubeconfig=${path.module}/kubeconfig    &&      kubectl apply -f ${path.module}/../empwebapp/templates/frontend-deployment.yaml --kubeconfig=${path.module}/kubeconfig   &&       kubectl apply -f ${path.module}/../empwebapp/templates/frontend-service.yaml --kubeconfig=${path.module}/kubeconfig  
     EOT 
     environment = {
       KUBECONFIG = "${path.module}/kubeconfig"
@@ -65,38 +54,4 @@ resource "null_resource" "apply_k8s_manifests" {
     azurerm_kubernetes_cluster.aks,
     local_file.kubeconfig
   ]
-}
-
-variable "aks_cluster_name" {
-  description = "The name of the AKS cluster"
-  type        = string
-  default     = "utkarshpathakAKS"
-}
-
-variable "location" {
-  description = "The Azure region to deploy to"
-  type        = string
-  default     = "East US"
-}
-
-variable "dns_prefix" {
-  description = "The DNS prefix for the AKS cluster"
-  type        = string
-  default     = "utkaks"
-}
-
-variable "node_count" {
-  description = "The number of nodes in the AKS cluster"
-  type        = number
-  default     = 3
-}
-
-variable "vm_size" {
-  description = "The size of the VMs in the AKS cluster"
-  type        = string
-  default     = "Standard_DS2_v2"
-}
-output "kube_config" {
-  value     = data.azurerm_kubernetes_cluster.aks.kube_config_raw
-  sensitive = true
 }
