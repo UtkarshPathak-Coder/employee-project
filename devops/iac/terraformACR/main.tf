@@ -23,7 +23,7 @@ resource "null_resource" "push_images" {
 
   provisioner "local-exec" {
     command = <<EOT
-      az acr login --name ${azurerm_container_registry.main.name} && cd ../backend  && docker build -t ${azurerm_container_registry.main.login_server}/backend:latest .   && docker push ${azurerm_container_registry.main.login_server}/backend:latest  && cd ../database && docker build -t ${azurerm_container_registry.main.login_server}/database:latest . &&  docker push ${azurerm_container_registry.main.login_server}/database:latest && cd ../../frontend && docker build -t ${azurerm_container_registry.main.login_server}/frontend:latest . && docker push ${azurerm_container_registry.main.login_server}/frontend:latest
+      az acr login --name ${azurerm_container_registry.main.name} && cd ../../backend  && docker build -t ${azurerm_container_registry.main.login_server}/backend:latest .   && docker push ${azurerm_container_registry.main.login_server}/backend:latest  && cd ../database && docker build -t ${azurerm_container_registry.main.login_server}/database:latest . &&  docker push ${azurerm_container_registry.main.login_server}/database:latest && cd ../../frontend && docker build -t ${azurerm_container_registry.main.login_server}/frontend:latest . && docker push ${azurerm_container_registry.main.login_server}/frontend:latest
         
     EOT
 
