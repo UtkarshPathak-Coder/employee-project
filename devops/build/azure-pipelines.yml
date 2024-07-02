@@ -10,10 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: TerraformTaskV4@4
+- task: terraforminit@0
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/../iac/terraformACR'
-    backendServiceArm: 'utkarsh-svc-conn'
-    backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
+    useazurerm: true
+    azureSubscription: 'utkarsh-svc-conn'
+    initbackend: false
+    tfrootpath: '../iac/terraformACR'
