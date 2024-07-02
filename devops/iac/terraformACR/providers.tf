@@ -8,8 +8,8 @@ terraform {
 }
 provider "azurerm" {
   features {}
-  skip_provider_registration = true
- 
+  subscription_id = "14d51dca-be7f-45d5-83f7-bc5ba5a5cfcb"
+  tenant_id       = "fe2cf472-1615-4350-ae39-21441d02fbf1"
 }
 
 provider "docker" {
