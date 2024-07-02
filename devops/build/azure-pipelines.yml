@@ -15,7 +15,7 @@ steps:
     terraformVersion: 'latest'
 - task: terraforminit@0
   inputs:
-    cwd: 'devops/iac/build'
+    cwd: 'devops/build'
     useazurerm: true
     azureSubscription: 'utkarsh-svc-conn'
     initbackend: false
