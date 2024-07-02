@@ -10,6 +10,9 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
 - task: terraforminit@0
   inputs:
     useazurerm: true
