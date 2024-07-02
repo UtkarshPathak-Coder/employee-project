@@ -18,8 +18,7 @@ steps:
     tfversion: '0.11.11'
 - task: terraforminit@0
   inputs:
-    cwd: 'devops/build'
     useazurerm: true
     azureSubscription: 'utkarsh-svc-conn'
     initbackend: false
-    tfrootpath: 'devops/iac/terraformACR'
+    tfrootpath: '../iac/terraformACR'
