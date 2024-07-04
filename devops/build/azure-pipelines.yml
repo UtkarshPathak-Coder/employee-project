@@ -42,12 +42,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
 
-- task: terraformdestroy@0
-  inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
-    useazurerm: true
-    connectedServiceNameARM: 'sagar-svc-conn'
-    tfRootPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
