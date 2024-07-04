@@ -16,12 +16,6 @@ steps:
 - task: terraformdownload@0
   inputs:
     tfversion: '0.11.11'
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'sagar-svc-conn'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az account show'
 - task: terraforminit@0
   inputs:
     cwd: './devops/iac/TerraformAKS/'
