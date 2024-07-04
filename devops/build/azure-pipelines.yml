@@ -18,7 +18,7 @@ steps:
     tfversion: '0.11.11'
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'utkarsh-svc-conn'
+    azureSubscription: 'sagar-svc-conn'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az account show'
