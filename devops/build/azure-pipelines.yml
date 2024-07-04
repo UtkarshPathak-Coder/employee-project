@@ -34,3 +34,9 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: false
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'utkarsh terraform pipeline'
+    publishLocation: 'pipeline'
