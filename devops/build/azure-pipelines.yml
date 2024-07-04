@@ -26,6 +26,7 @@ steps:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: './devops/iac/TerraformAKS/'
+
 - task: terraformplan@0
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
@@ -34,7 +35,12 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: false
-
+- task: terraformapply@0
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    useazurerm: true
+    connectedServiceNameARM: 'sagar-svc-conn'
+    planOrPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
