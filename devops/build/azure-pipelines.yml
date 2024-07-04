@@ -40,7 +40,6 @@ steps:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     useazurerm: true
     connectedServiceNameARM: 'sagar-svc-conn'
-    planOrPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
