@@ -35,12 +35,12 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: false
-- task: terraformapply@0
+- task: TerraformTaskV4@4
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
-    useazurerm: true
-    connectedServiceNameARM: 'sagar-svc-conn'
-    planOrPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
