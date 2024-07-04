@@ -27,4 +27,4 @@ steps:
     useazurerm: true
     azureSubscription: 'sagar-svc-conn'
     initbackend: false
-    tfrootpath: './devops/iac/terraformAKS'
+    tfrootpath: './devops/iac/TerraformAKS/'
