@@ -26,9 +26,3 @@ steps:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: './devops/iac/TerraformAKS/'
-- task: terraforminit@0
-  inputs:
-    useazurerm: true
-    azureSubscription: 'sagar-svc-conn'
-    initbackend: false
-    tfrootpath: './devops/iac/TerraformAKS/'
