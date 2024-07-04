@@ -22,6 +22,11 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az account show'
+- task: terraforminit@0
+  inputs:
+    cwd: './devops/iac/TerraformAKS/'
+    useazurerm: false
+    initbackend: false
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
