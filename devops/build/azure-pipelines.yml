@@ -25,6 +25,6 @@ steps:
 - task: terraforminit@0
   inputs:
     useazurerm: true
-    azureSubscription: 'utkarsh-svc-conn'
+    azureSubscription: 'sagar-svc-conn'
     initbackend: false
     tfrootpath: './devops/iac/terraformACR'
