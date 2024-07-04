@@ -26,3 +26,11 @@ steps:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: './devops/iac/TerraformAKS/'
+- task: terraformplan@0
+  inputs:
+    useazurerm: true
+    connectedServiceNameARM: 'sagar-svc-conn'
+    usevarsfile: false
+    usevars: false
+    savePlanResult: false
+    tfrootpath: './devops/iac/TerraformAKS/'
