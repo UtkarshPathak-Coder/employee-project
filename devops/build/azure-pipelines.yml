@@ -28,9 +28,10 @@ steps:
     workingDirectory: './devops/iac/TerraformAKS/'
 - task: terraformplan@0
   inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     useazurerm: true
     connectedServiceNameARM: 'sagar-svc-conn'
     usevarsfile: false
     usevars: false
     savePlanResult: false
-    tfrootpath: './devops/iac/TerraformAKS/'
+    tfrootpath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
