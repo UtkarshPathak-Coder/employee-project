@@ -16,6 +16,12 @@ steps:
 - task: terraformdownload@0
   inputs:
     tfversion: '0.11.11'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'utkarsh-svc-conn'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az account show'
 - task: terraforminit@0
   inputs:
     useazurerm: true
