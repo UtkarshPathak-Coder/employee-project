@@ -22,7 +22,11 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az account show'
-
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: './devops/iac/TerraformAKS/'
 - task: terraforminit@0
   inputs:
     useazurerm: true
