@@ -22,6 +22,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az account show'
+
 - task: terraforminit@0
   inputs:
     useazurerm: true
