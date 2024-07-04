@@ -21,4 +21,4 @@ steps:
     useazurerm: true
     azureSubscription: 'utkarsh-svc-conn'
     initbackend: false
-    tfrootpath: '../iac/terraformACR'
+    tfrootpath: './devops/iac/terraformACR'
