@@ -34,4 +34,3 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: false
-    tfrootpath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
