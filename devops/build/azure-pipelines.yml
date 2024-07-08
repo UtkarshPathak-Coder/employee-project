@@ -59,16 +59,8 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: true
-    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
-- task: TerraformTaskV4@4
-  displayName: display tfplan for debuging
-  inputs:
-    provider: 'azurerm'
-    command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
-    outputTo: 'console'
-    outputFormat: 'default'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
+    planOutput: 'tfplan'
+
 - task: terraformplan@0
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
@@ -77,29 +69,7 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: true
-    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
-
-- task: TerraformTaskV4@4
-  displayName: show ACR
-  inputs:
-    provider: 'azurerm'
-    command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
-    outputTo: 'file'
-    outputFormat: 'json'
-    fileName: '$(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
-- task: TerraformTaskV4@4
-  displayName: show AKS
-  inputs:
-    provider: 'azurerm'
-    command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
-    outputTo: 'file'
-    outputFormat: 'json'
-    fileName: '$(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
-
+    planOutput: '.tfplan'
 
 - task: CopyFiles@2
   displayName: Copy .tf files
