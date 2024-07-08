@@ -1,9 +1,24 @@
 terraform {
-  backend "azurerm" {
-    storage_account_name = "akstasksa"
-    container_name       = "akscontainer"
-    key                  = "terraform.tfstate"
-    resource_group_name  = "Utkarsh-Pathak-rg"
-    subscription_id      = "14d51dca-be7f-45d5-83f7-bc5ba5a5cfcb"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.59.0"
+    }
   }
+  backend "azurerm" {
+    resource_group_name   = var.backend_resource_group
+    storage_account_name  = var.backend_storage_account
+    container_name        = var.backend_container_name
+    key                   = var.backend_key
+    subscription_id       = var.azure_subscription_id
+    tenant_id             = var.azure_tenant_id
+  }
+}
+
+# Configure the Azure provider
+provider "azurerm" {
+  features {}
+  environment     = "public"
+  subscription_id = var.azure_subscription_id
+  tenant_id       = var.azure_tenant_id
 }
