@@ -42,16 +42,13 @@ steps:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: './devops/iac/terraformACR/'
-- task: terraformplan@0
-  displayName: terraform plan AKS
+- task: TerraformTaskV4@4
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
-    useazurerm: true
-    connectedServiceNameARM: 'sagar-svc-conn'
-    usevarsfile: false
-    usevars: false
-    savePlanResult: true
-    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    commandOptions: '-out=tfplan'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
@@ -62,16 +59,13 @@ steps:
     environmentServiceNameAzureRM: 'sagar-svc-conn'
 
 
-- task: terraformplan@0
-  displayName: terraform plan ACR
+- task: TerraformTaskV4@4
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
-    useazurerm: true
-    connectedServiceNameARM: 'sagar-svc-conn'
-    usevarsfile: false
-    usevars: false
-    savePlanResult: true
-    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
+    commandOptions: '-out=tfplan'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
       
 - task: terraforminit@0
   displayName: Terraform init in iac
