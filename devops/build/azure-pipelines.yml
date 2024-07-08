@@ -58,4 +58,4 @@ steps:
     targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/'
     artifact: 'utkarsh terraform pipeline'
     publishLocation: 'pipeline'
-    fileCopyOption: '**/*.tf'
+    properties: '**/*.tf'
