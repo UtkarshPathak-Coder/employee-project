@@ -43,14 +43,35 @@ steps:
     command: 'validate'
     workingDirectory: './devops/iac/terraformACR/'
 - task: terraformplan@0
-  displayName: terraform plan all modules
+  displayName: terraform plan AKS
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     useazurerm: true
     connectedServiceNameARM: 'sagar-svc-conn'
     usevarsfile: false
     usevars: false
     savePlanResult: true
+    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+
+- task: terraformplan@0
+  displayName: terraform plan ACR
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
+    useazurerm: true
+    connectedServiceNameARM: 'sagar-svc-conn'
+    usevarsfile: false
+    usevars: false
+    savePlanResult: true
+    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
+
+- script: |
+    #!/bin/bash
+    terraform show -json $(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan > $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json
+    terraform show -json $(System.DefaultWorkingDirectory)/devops/iac/TerraformACR/tfplan > $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json
+    jq -s '.[0] * .[1]' $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json > $(System.DefaultWorkingDirectory)/devops/iac/combined_plan.json
+    terraform plan -out=$(System.DefaultWorkingDirectory)/devops/iac/tfplan -input=false -var-file=$(System.DefaultWorkingDirectory)/devops/iac/combined_plan.json
+  displayName: Merge Terraform plans
+
 - task: CopyFiles@2
   displayName: Copy .tf files
   inputs:
