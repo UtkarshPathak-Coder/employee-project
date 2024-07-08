@@ -55,7 +55,7 @@ steps:
   displayName: Copy .tf files
   inputs:
     sourceFolder: '$(System.DefaultWorkingDirectory)/devops/iac'
-    contents: '**/*.tf'
+    contents: '**/*.tf || tfplan'
     targetFolder: '$(Build.ArtifactStagingDirectory)/tf-files'
 - task: PublishPipelineArtifact@1
   displayName: Publish teraform .tf files
