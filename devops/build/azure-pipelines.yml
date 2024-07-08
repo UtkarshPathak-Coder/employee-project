@@ -17,7 +17,7 @@ steps:
 
 - task: terraforminit@0
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'''
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     useazurerm: true
     azureSubscription: 'sagar-svc-conn'
     backendConfigPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/backend.tf'
