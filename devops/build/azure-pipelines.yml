@@ -15,18 +15,14 @@ steps:
   inputs:
     terraformVersion: 'latest'
 
-- task: TerraformTaskV4@4
-  displayName: terraform init AKS
+- task: terraforminit@0
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
-    backendAzureRmUseEnvironmentVariablesForAuthentication: false
-    backendServiceArm: 'sagar-svc-conn'
-    backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
-    backendAzureRmStorageAccountName: 'akstasksa'
-    backendAzureRmContainerName: 'akscontainer'
-    backendAzureRmKey: 'terraform.tfstate'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'''
+    useazurerm: true
+    azureSubscription: 'sagar-svc-conn'
+    backendConfigPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/backend.tf'
+    initbackend: true
+
 - task: TerraformTaskV4@4
   displayName: terraform init ACR
   inputs:
