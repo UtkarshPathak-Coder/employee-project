@@ -15,29 +15,22 @@ steps:
   inputs:
     terraformVersion: 'latest'
 
-- task: TerraformTaskV4@4
-  displayName: terraform init ACR
+- task: terraforminit@0
+  displayName: init Terraform AKS
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
-    backendServiceArm: 'sagar-svc-conn'
-    backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
-    backendAzureRmStorageAccountName: 'akstasksa'
-    backendAzureRmContainerName: 'akscontainer'
-    backendAzureRmKey: 'terraform.tfstate'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    useazurerm: true
+    azureSubscription: 'sagar-svc-conn'
+    initbackend: false
 
-- task: TerraformTaskV4@4
-  displayName: terraform init ACR
+- task: terraforminit@0
+  displayName: init Terraform ACR
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/'
-    backendServiceArm: 'sagar-svc-conn'
-    backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
-    backendAzureRmStorageAccountName: 'akstasksa'
-    backendAzureRmContainerName: 'akscontainer'
-    backendAzureRmKey: 'terraform.tfstate'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
+    useazurerm: true
+    azureSubscription: 'sagar-svc-conn'
+    initbackend: false
+
 - task: TerraformTaskV4@4
   displayName: terraform validate AKS
   inputs:
