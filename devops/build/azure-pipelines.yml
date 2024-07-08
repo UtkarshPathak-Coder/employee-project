@@ -70,10 +70,30 @@ steps:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/'
     useazurerm: false
     initbackend: false
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'show'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+    outputTo: 'file'
+    outputFormat: 'json'
+    fileName: '$(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'show'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
+    outputTo: 'file'
+    outputFormat: 'json'
+    fileName: '$(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
+
+
+
 - script: |
     #!/bin/bash
-    terraform show -json $(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan > $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json
-    terraform show -json $(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan > $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json
     jq -s '.[0] * .[1]' $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json > $(System.DefaultWorkingDirectory)/devops/iac/combined_plan.json
     terraform plan -out=$(System.DefaultWorkingDirectory)/devops/iac/tfplan -input=false -var-file=$(System.DefaultWorkingDirectory)/devops/iac/combined_plan.json
   displayName: Merge Terraform plans
