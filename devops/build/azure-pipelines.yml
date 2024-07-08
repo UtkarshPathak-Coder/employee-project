@@ -56,7 +56,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
     outputTo: 'console'
     outputFormat: 'json'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
