@@ -52,6 +52,15 @@ steps:
     usevars: false
     savePlanResult: true
     planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'show'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+    outputTo: 'console'
+    outputFormat: 'json'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
+
 
 - task: terraformplan@0
   displayName: terraform plan ACR
