@@ -49,15 +49,6 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     commandOptions: '-out=tfplan'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'azurerm'
-    command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
-    outputTo: 'console'
-    outputFormat: 'json'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
-
 
 - task: TerraformTaskV4@4
   inputs:
@@ -93,14 +84,6 @@ steps:
     outputFormat: 'json'
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-- script: |
-    cat $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json
-
-
-- script: |
-    #!/bin/bash
-    ls  "$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/"
-    ls "$(System.DefaultWorkingDirectory)/devops/iac/"
 
 
 - task: CopyFiles@2
@@ -111,6 +94,7 @@ steps:
      **/*.tf
      tfplan
      **/tfplan
+     *.json
     targetFolder: '$(Build.ArtifactStagingDirectory)/tf-files'
 - task: PublishPipelineArtifact@1
   displayName: Publish teraform .tf files
