@@ -65,7 +65,13 @@ steps:
     usevars: false
     savePlanResult: true
     planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
-
+- task: terraforminit@0
+  displayName: Terraform init ACR
+  inputs:
+    cwd: './devops/iac/'
+    useazurerm: true
+    azureSubscription: 'sagar-svc-conn'
+    initbackend: false
 - script: |
     #!/bin/bash
     terraform show -json $(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan > $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json
