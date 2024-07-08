@@ -28,7 +28,8 @@ steps:
   displayName: Terraform init ACR
   inputs:
     cwd: './devops/iac/terraformACR/'
-    useazurerm: false
+    useazurerm: true
+    azureSubscription: 'sagar-svc-conn'
     initbackend: false
 - task: TerraformTaskV4@4
   displayName: terraform validate AKS
