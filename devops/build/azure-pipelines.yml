@@ -74,7 +74,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
     outputTo: 'file'
     outputFormat: 'json'
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json'
@@ -84,7 +84,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/'
     outputTo: 'file'
     outputFormat: 'json'
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json'
