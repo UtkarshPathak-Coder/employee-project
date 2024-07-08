@@ -22,15 +22,13 @@ steps:
   displayName: Terraform init AKS
   inputs:
     cwd: './devops/iac/TerraformAKS/'
-    useazurerm: true
-    azureSubscription: 'sagar-svc-conn'
+    useazurerm: false
     initbackend: false
 - task: terraforminit@0
   displayName: Terraform init ACR
   inputs:
     cwd: './devops/iac/terraformACR/'
-    useazurerm: true
-    azureSubscription: 'sagar-svc-conn'
+    useazurerm: false
     initbackend: false
 - task: TerraformTaskV4@4
   displayName: terraform validate AKS
@@ -65,12 +63,12 @@ steps:
     usevars: false
     savePlanResult: true
     planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
+      
 - task: terraforminit@0
   displayName: Terraform init in iac
   inputs:
-    cwd: './devops/iac/'
-    useazurerm: true
-    azureSubscription: 'sagar-svc-conn'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/'
+    useazurerm: false
     initbackend: false
 - script: |
     #!/bin/bash
