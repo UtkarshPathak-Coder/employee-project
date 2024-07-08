@@ -11,23 +11,39 @@ pool:
 
 steps:
 - task: TerraformInstaller@1
+  displayName: Terraform installer
   inputs:
     terraformVersion: 'latest'
 - task: terraformdownload@0
+  displayName: 
   inputs:
     tfversion: '0.11.11'
 - task: terraforminit@0
+  displayName: Terraform init AKS
   inputs:
     cwd: './devops/iac/TerraformAKS/'
     useazurerm: false
     initbackend: false
+- task: terraforminit@0
+  displayName: Terraform init ACR
+  inputs:
+    cwd: './devops/iac/terraformACR/'
+    useazurerm: false
+    initbackend: false
 - task: TerraformTaskV4@4
+  displayName: terraform validate AKS
   inputs:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: './devops/iac/TerraformAKS/'
-
+- task: TerraformTaskV4@4
+  displayName: terraform validate ACR
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: './devops/iac/TerraformACR/'
 - task: terraformplan@0
+  displayName: terraform plan all modules
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     useazurerm: true
@@ -35,16 +51,11 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: false
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
-
 
 - task: PublishPipelineArtifact@1
+  displayName: Publish teraform .tf files
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/'
     artifact: 'utkarsh terraform pipeline'
     publishLocation: 'pipeline'
+    fileCopyOption: '**/*.tf'
