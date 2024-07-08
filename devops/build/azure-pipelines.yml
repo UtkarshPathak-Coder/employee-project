@@ -11,14 +11,12 @@ pool:
 
 steps:
 - task: TerraformInstaller@1
-  displayName: Terraform installer
+  displayName: install Tearraform
   inputs:
     terraformVersion: 'latest'
-- task: terraformdownload@0
-  displayName: 
-  inputs:
-    tfversion: '0.11.11'
+
 - task: TerraformTaskV4@4
+  displayName: terraform init AKS
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -30,6 +28,7 @@ steps:
     backendAzureRmContainerName: 'akscontainer'
     backendAzureRmKey: 'terraform.tfstate'
 - task: TerraformTaskV4@4
+  displayName: terraform init ACR
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -52,6 +51,7 @@ steps:
     command: 'validate'
     workingDirectory: './devops/iac/terraformACR/'
 - task: terraformplan@0
+  displayName: terraform Plan AKS
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     useazurerm: true
@@ -62,6 +62,7 @@ steps:
     planOutput: 'tfplan'
 
 - task: terraformplan@0
+  displayName: terraform Plan ACR
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
     useazurerm: true
@@ -69,7 +70,7 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: true
-    planOutput: '.tfplan'
+    planOutput: 'tfplan'
 
 - task: CopyFiles@2
   displayName: Copy .tf files
@@ -77,9 +78,7 @@ steps:
     sourceFolder: '$(System.DefaultWorkingDirectory)/devops/iac'
     contents: |
      **/*.tf
-     tfplan
      **/tfplan
-     *.json
     targetFolder: '$(Build.ArtifactStagingDirectory)/tf-files'
     
 - task: PublishPipelineArtifact@1
