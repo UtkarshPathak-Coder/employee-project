@@ -41,7 +41,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'validate'
-    workingDirectory: './devops/iac/TerraformACR/'
+    workingDirectory: './devops/iac/terraformACR/'
 - task: terraformplan@0
   displayName: terraform plan all modules
   inputs:
