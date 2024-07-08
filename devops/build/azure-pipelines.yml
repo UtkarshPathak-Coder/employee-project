@@ -45,7 +45,7 @@ steps:
 - task: terraformplan@0
   displayName: terraform plan all modules
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac'
     useazurerm: true
     connectedServiceNameARM: 'sagar-svc-conn'
     usevarsfile: false
