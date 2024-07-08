@@ -43,21 +43,32 @@ steps:
     command: 'validate'
     workingDirectory: './devops/iac/terraformACR/'
 - task: TerraformTaskV4@4
+  displayName: plan AKS
   inputs:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     commandOptions: '-out=tfplan'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-
 - task: TerraformTaskV4@4
+  displayName: display tfplan for debuging
+  inputs:
+    provider: 'azurerm'
+    command: 'show'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformAKS'
+    outputTo: 'console'
+    outputFormat: 'default'
+    environmentServiceNameAzureRM: 'sagar-svc-conn'
+- task: TerraformTaskV4@4
+  displayName: plan ACR
   inputs:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
     commandOptions: '-out=tfplan'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-      
+
+
 - task: terraforminit@0
   displayName: Terraform init in iac
   inputs:
