@@ -50,7 +50,7 @@ steps:
     connectedServiceNameARM: 'sagar-svc-conn'
     usevarsfile: false
     usevars: false
-    savePlanResult: false
+    savePlanResult: true
 - task: CopyFiles@2
   displayName: Copy .tf files
   inputs:
