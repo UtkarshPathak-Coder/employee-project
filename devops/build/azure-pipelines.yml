@@ -18,12 +18,17 @@ steps:
   displayName: 
   inputs:
     tfversion: '0.11.11'
-- task: terraforminit@0
-  displayName: Terraform init AKS
+- task: TerraformTaskV4@4
   inputs:
-    cwd: './devops/iac/TerraformAKS/'
-    useazurerm: false
-    initbackend: false
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendServiceArm: 'sagar-svc-conn'
+    backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
+    backendAzureRmStorageAccountName: 'akstasksa'
+    backendAzureRmContainerName: 'akscontainer'
+    backendAzureRmKey: 'terraform.tfstate'
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
@@ -46,14 +51,15 @@ steps:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: './devops/iac/terraformACR/'
-- task: TerraformTaskV4@4
-  displayName: plan AKS
+- task: terraformplan@0
   inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
-    commandOptions: '-out=tfplan'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    useazurerm: true
+    connectedServiceNameARM: 'sagar-svc-conn'
+    usevarsfile: false
+    usevars: false
+    savePlanResult: true
+    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/tfplan'
 - task: TerraformTaskV4@4
   displayName: display tfplan for debuging
   inputs:
@@ -63,14 +69,15 @@ steps:
     outputTo: 'console'
     outputFormat: 'default'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-- task: TerraformTaskV4@4
-  displayName: plan ACR
+- task: terraformplan@0
   inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
-    commandOptions: '-out=tfplan'
-    environmentServiceNameAzureRM: 'sagar-svc-conn'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
+    useazurerm: true
+    connectedServiceNameARM: 'sagar-svc-conn'
+    usevarsfile: false
+    usevars: false
+    savePlanResult: true
+    planOutput: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/tfplan'
 
 - task: TerraformTaskV4@4
   displayName: show ACR
