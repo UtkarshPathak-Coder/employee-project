@@ -28,6 +28,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR/'
     backendServiceArm: 'sagar-svc-conn'
     backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
     backendAzureRmStorageAccountName: 'akstasksa'
