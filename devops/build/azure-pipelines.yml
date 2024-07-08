@@ -79,7 +79,8 @@ steps:
     outputFormat: 'json'
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-
+- script: |
+    cat $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
@@ -89,6 +90,9 @@ steps:
     outputFormat: 'json'
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
+- script: |
+    cat $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json
+
 
 - script: |
     #!/bin/bash
