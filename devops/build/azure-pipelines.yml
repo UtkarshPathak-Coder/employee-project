@@ -51,11 +51,16 @@ steps:
     usevarsfile: false
     usevars: false
     savePlanResult: false
-
+- task: CopyFiles@2
+  displayName: Copy .tf files
+  inputs:
+    sourceFolder: '$(System.DefaultWorkingDirectory)/devops/iac'
+    contents: '**/*.tf'
+    targetFolder: '$(Build.ArtifactStagingDirectory)/tf-files'
 - task: PublishPipelineArtifact@1
   displayName: Publish teraform .tf files
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/devops/iac/'
+    targetPath: '$(Build.ArtifactStagingDirectory)/tf-files'
     artifact: 'utkarsh terraform pipeline'
     publishLocation: 'pipeline'
-    properties: '**/*.tf'
+    
