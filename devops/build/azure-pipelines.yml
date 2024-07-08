@@ -24,13 +24,15 @@ steps:
     cwd: './devops/iac/TerraformAKS/'
     useazurerm: false
     initbackend: false
-- task: terraforminit@0
-  displayName: Terraform init ACR
+- task: TerraformTaskV4@4
   inputs:
-    cwd: './devops/iac/terraformACR/'
-    useazurerm: true
-    azureSubscription: 'sagar-svc-conn'
-    initbackend: false
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'sagar-svc-conn'
+    backendAzureRmResourceGroupName: 'Utkarsh-Pathak-rg'
+    backendAzureRmStorageAccountName: 'akstasksa'
+    backendAzureRmContainerName: 'akscontainer'
+    backendAzureRmKey: 'terraform.tfstate'
 - task: TerraformTaskV4@4
   displayName: terraform validate AKS
   inputs:
@@ -77,6 +79,7 @@ steps:
     useazurerm: false
     initbackend: false
 - task: TerraformTaskV4@4
+  displayName: show AKS
   inputs:
     provider: 'azurerm'
     command: 'show'
@@ -85,9 +88,9 @@ steps:
     outputFormat: 'json'
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
-- script: |
-    cat $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json
+
 - task: TerraformTaskV4@4
+  displayName: show ACR
   inputs:
     provider: 'azurerm'
     command: 'show'
