@@ -90,13 +90,11 @@ steps:
     fileName: '$(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
 
-
-
 - script: |
     #!/bin/bash
-    jq -s '.[0] * .[1]' $(System.DefaultWorkingDirectory)/devops/iac/aks_plan.json $(System.DefaultWorkingDirectory)/devops/iac/acr_plan.json > $(System.DefaultWorkingDirectory)/devops/iac/combined_plan.json
-    terraform plan -out=$(System.DefaultWorkingDirectory)/devops/iac/tfplan -input=false -var-file=$(System.DefaultWorkingDirectory)/devops/iac/combined_plan.json
-  displayName: Merge Terraform plans
+    ls  "$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS/"
+    ls "$(System.DefaultWorkingDirectory)/devops/iac/"
+
 
 - task: CopyFiles@2
   displayName: Copy .tf files
