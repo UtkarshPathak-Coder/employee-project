@@ -55,7 +55,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'show'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/terraformAKS'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
     outputTo: 'console'
     outputFormat: 'default'
     environmentServiceNameAzureRM: 'sagar-svc-conn'
