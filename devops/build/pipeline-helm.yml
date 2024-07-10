@@ -16,7 +16,7 @@ steps:
     installKubectl: true
 
 - script: |
-    helm  package ./devops/empwebapp/
+    helm  package ./devops/empwebapp
     mkdir -p $(Build.ArtifactStagingDirectory)/charts
     mv *.tgz $(Build.ArtifactStagingDirectory)/charts/
   displayName: 'Package Helm chart'
