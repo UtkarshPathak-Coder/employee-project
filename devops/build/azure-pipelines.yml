@@ -16,7 +16,7 @@ steps:
     terraformVersion: 'latest'
 
 - task: terraforminit@0
-  displayName: init Terraform AKS
+  displayName: init Terraform 
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/compute'
     useazurerm: true
@@ -25,7 +25,7 @@ steps:
 
 
 - task: TerraformTaskV4@4
-  displayName: terraform validate AKS
+  displayName: terraform validate
   inputs:
     provider: 'azurerm'
     command: 'validate'
@@ -35,7 +35,7 @@ steps:
 
 
 - task: terraformplan@0
-  displayName: terraform Plan AKS
+  displayName: terraform Plan
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)/devops/iac/compute'
     useazurerm: true
