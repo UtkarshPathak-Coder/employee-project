@@ -18,35 +18,26 @@ steps:
 - task: terraforminit@0
   displayName: init Terraform AKS
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/compute'
     useazurerm: true
     azureSubscription: 'sagar-svc-conn'
     initbackend: false
 
-- task: terraforminit@0
-  displayName: init Terraform ACR
-  inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
-    useazurerm: true
-    azureSubscription: 'sagar-svc-conn'
-    initbackend: false
 
 - task: TerraformTaskV4@4
   displayName: terraform validate AKS
   inputs:
     provider: 'azurerm'
     command: 'validate'
-    workingDirectory: './devops/iac/TerraformAKS/'
-- task: TerraformTaskV4@4
-  displayName: terraform validate ACR
-  inputs:
-    provider: 'azurerm'
-    command: 'validate'
-    workingDirectory: './devops/iac/terraformACR/'
+    workingDirectory: './devops/iac/compute/'
+
+
+
+
 - task: terraformplan@0
   displayName: terraform Plan AKS
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/TerraformAKS'
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/compute'
     useazurerm: true
     connectedServiceNameARM: 'sagar-svc-conn'
     usevarsfile: false
@@ -54,16 +45,6 @@ steps:
     savePlanResult: true
     planOutput: 'tfplan'
 
-- task: terraformplan@0
-  displayName: terraform Plan ACR
-  inputs:
-    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/terraformACR'
-    useazurerm: true
-    connectedServiceNameARM: 'sagar-svc-conn'
-    usevarsfile: false
-    usevars: false
-    savePlanResult: true
-    planOutput: 'tfplan'
 
 - task: CopyFiles@2
   displayName: Copy .tf files
@@ -73,6 +54,8 @@ steps:
      **/*.tf
      **/tfplan
     targetFolder: '$(Build.ArtifactStagingDirectory)/tf-files'
+
+    
     
 - task: PublishPipelineArtifact@1
   displayName: Publish teraform .tf files
