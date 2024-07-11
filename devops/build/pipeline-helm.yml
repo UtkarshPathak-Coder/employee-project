@@ -15,6 +15,7 @@ steps:
     helmVersion: 'latest'
     installKubectl: true
 - task: Docker@2
+  displayName: build and push backend image
   inputs:
     containerRegistry: 'acr-utk-svc-conn'
     repository: 'backend'
@@ -23,6 +24,7 @@ steps:
 
 
 - task: Docker@2
+  displayName: build and push database image
   inputs:
     containerRegistry: 'acr-utk-svc-conn'
     repository: 'database'
@@ -31,6 +33,7 @@ steps:
 
 
 - task: Docker@2
+  displayName: build and push frontend image
   inputs:
     containerRegistry: 'acr-utk-svc-conn'
     repository: 'frontend'
