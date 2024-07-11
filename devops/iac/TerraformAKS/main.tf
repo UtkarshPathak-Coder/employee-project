@@ -33,7 +33,7 @@ data "azurerm_kubernetes_cluster" "aks" {
 
 resource "local_file" "kubeconfig" {
   content  = data.azurerm_kubernetes_cluster.aks.kube_config_raw
-  filename = "${path.module}/kubeconfig"
+  filename = "${path.module}/../compute/kubeconfig"
 }
 
 resource "null_resource" "apply_k8s_manifests" {
