@@ -3,6 +3,7 @@ import cors from 'cors';
 import { adminRouter } from "./Routes/AdminRoute.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { EventHubProducerClient } from "@azure/event-hubs"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -24,8 +25,27 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
+const connectionString = "Endpoint=sb://utkeventhub.servicebus.windows.net/;SharedAccessKeyName=receive-from-app;SharedAccessKey=EUfL3o8Q6NnfR7PIB18vs0e03M3R07Iil+AEhBCbOsc=;EntityPath=server-runnig";
+const eventHubName = "server-runnig";
+const producer = new EventHubProducerClient(connectionString, eventHubName);
+
+// Function to send a message to Event Hub
+const sendMessageToEventHub = async (message) => {
+    try {
+        const batch = await producer.createBatch();
+        batch.tryAdd({ body: message });
+        await producer.sendBatch(batch);
+        console.log("Message sent to Event Hub:", message);
+    } catch (error) {
+        console.error("Failed to send message to Event Hub:", error);
+    }
+};
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    (async () => {
+        console.log("Sending log message to Event Hub...");
+        await sendMessageToEventHub(`Server running on port ${PORT}`);
+    })();
 });
