@@ -49,3 +49,4 @@ app.listen(PORT, () => {
         await sendMessageToEventHub(`Server running on port ${PORT}`);
     })();
 });
+export default sendMessageToEventHub;

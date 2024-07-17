@@ -11,22 +11,3 @@ resource "azurerm_container_registry" "main" {
 
   admin_enabled = true
 }
-
-# resource "null_resource" "docker_login" {
-#   provisioner "local-exec" {
-#     command = "az acr login --name ${azurerm_container_registry.main.name}"
-#   }
-# }
-
-# resource "null_resource" "push_images" {
-#   depends_on = [null_resource.docker_login]
-
-#   provisioner "local-exec" {
-#     command = <<EOT
-#       az acr login --name ${azurerm_container_registry.main.name} && cd ../../../backend  && docker build -t ${azurerm_container_registry.main.login_server}/backend:latest .   && docker push ${azurerm_container_registry.main.login_server}/backend:latest  && cd ../database && docker build -t ${azurerm_container_registry.main.login_server}/database:latest . &&  docker push ${azurerm_container_registry.main.login_server}/database:latest && cd ../frontend && docker build -t ${azurerm_container_registry.main.login_server}/frontend:latest . && docker push ${azurerm_container_registry.main.login_server}/frontend:latest
-        
-#     EOT
-
-    
-#   }
-# }
