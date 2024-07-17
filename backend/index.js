@@ -25,7 +25,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-const connectionString = "Endpoint=sb://utkeventhub.servicebus.windows.net/;SharedAccessKeyName=receive-from-app;SharedAccessKey=EUfL3o8Q6NnfR7PIB18vs0e03M3R07Iil+AEhBCbOsc=;EntityPath=server-runnig";
+const connectionString = process.env.conn_string;
 const eventHubName = "server-runnig";
 const producer = new EventHubProducerClient(connectionString, eventHubName);
 
