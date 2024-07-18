@@ -13,8 +13,10 @@ router.post("/adminlogin", (req, res) => {
             const email = result.rows[0].email;
             const token = jwt.sign({ role: "admin", email: email }, "jwt_secret_key", { expiresIn: '1d' });
             res.cookie('token',token);
+            console.log("Admin login successful for email:", email);
             return res.json({ loginStatus: true });
         } else {
+            console.log("Incorrect email or password for email:", req.body.email);
             return res.json({ loginStatus: false, Error: "Incorrect email or password" });
         }
     });
@@ -23,6 +25,7 @@ router.get('/Category', (req, res) => {
     const sql = "SELECT * FROM department";
     pool.query(sql, (err, result) => {
         if(err) return res.json({Status: false, Error : "Query Error"});
+        console.log("Fetched categories");
         return res.json({Status: true, Result: result.rows});
     });
 });
@@ -32,12 +35,14 @@ router.post('/Addcategory', (req, res) => {
     pool.query(sql, [req.body.category], (err, result) => {
         if (err) {
             if (err.code === '23505') { 
+                console.warn("Duplicate entry for category:", req.body.category);
                 return res.json({ Status: false, Error: "Duplicate entry. Department already exists." });
             } else {
                 console.error(err);
                 return res.json({ Status: false, Error: "Query Error" });
             }
         }
+        console.log("Added new category:", req.body.category);
         return res.json({ Status: true });
     });
 });
@@ -51,6 +56,7 @@ router.post('/addemployee', (req, res) => {
         }
 
         if (result.rows.length > 0) {
+            console.warn("Duplicate email entry for email:", req.body.email);
             return res.json({ Status: false, Error: "Duplicate email entry" });
         }
 
@@ -66,6 +72,7 @@ router.post('/addemployee', (req, res) => {
             ];
             pool.query(sqlInsertEmployee, values, (err, result) => {
                 if (err) return res.json({ Status: false, Error: err });
+                console.log("Added new employee:", req.body.name);
                 return res.json({ Status: true });
             });
         
@@ -77,6 +84,7 @@ router.get('/employee', (req, res) => {
     const sql = "SELECT e.*, d.name AS department_name FROM employee e JOIN department d ON e.department_id = d.id order by e.id ASC";
     pool.query(sql, (err, result) => {
         if(err) return res.json({Status: false, Error : "Query Error"});
+        console.log("Fetched all employees");
         return res.json({Status: true, Result: result.rows});
     });
 });
@@ -85,6 +93,7 @@ router.get('/employee/:id', (req, res) => {
     const sql = "SELECT * FROM employee WHERE id=$1";
     pool.query(sql, [id], (err, result) => {
         if(err) return res.json({Status: false, Error : "Query Error"});
+        console.log("Fetched employee with ID:", id);
         return res.json({Status: true, Result: result.rows});
     });
 });
@@ -101,6 +110,7 @@ router.put('/edit_employee/:id', (req, res) => {
     ];
     pool.query(sql, [...values, id], (err, result) => {
         if(err) return res.json({Status: false, Error : "Query Error"});
+        console.log("Updated employee with ID:", id);
         return res.json({Status: true});
     });
 });
@@ -110,6 +120,7 @@ router.delete('/delete_employee/:id', (req, res) => {
     const sql = 'DELETE FROM employee WHERE id=$1';
     pool.query(sql, [id], (err, result) => {
         if(err) return res.json({Status: false, Error : "Query Error"});
+        console.log("Deleted employee with ID:", id);
         return res.json({Status: true});
     });
 });
@@ -120,6 +131,7 @@ router.get('/admin_count', (req, res) => {
             console.error(err);
             return res.status(500).json({ Status: false, Error: "Query Error" });
         }
+        console.log("Fetched admin count")
         return res.json({ Status: true, admin: result.rows[0].admin }); 
     });
 });
@@ -130,6 +142,7 @@ router.get('/employee_count', (req, res) => {
             console.error(err);
             return res.status(500).json({ Status: false, Error: "Query Error" });
         }
+        console.log("Fetched employee count");
         return res.json({ Status: true, employee: result.rows[0].employee }); 
     });
 });
@@ -140,19 +153,22 @@ router.get('/salary_count', (req, res) => {
             console.error(err);
             return res.status(500).json({ Status: false, Error: "Query Error" });
         }
+        console.log("Fetched total salary");
         return res.json({ Status: true, salary: result.rows[0].salary }); 
     });
 });
 
 
 router.get('/logout',(req,res)=>{
-    res.clearCookie('token')
+    res.clearCookie('token');
+    console.log("Admin logged out");
     return res.json({Status:true})
 })
 router.get('/admin_record', (req, res) => {
     const sql = "SElect * from admin";
     pool.query(sql, (err, result) => {
         if(err) return res.json({Status: false, Error : "Query Error"});
+        console.log("Fetched all admin records");
         return res.json({Status: true, Result: result.rows});
     });
 });
@@ -165,6 +181,7 @@ router.put('/edit_adminpass/:id', (req, res) => {
             console.error(err);
             return res.status(500).json({ Status: false, Error: "Query Error" });
         }
+        console.log("Updated password for admin with ID:", id);
         return res.json({ Status: true });
     });
 });
