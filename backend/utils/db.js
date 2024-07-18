@@ -20,7 +20,6 @@ pool.connect((err) => {
     } else {
         console.log('Connected to the database!');
         (async () => {
-            console.log("Sending log message to Event Hub...");
             await sendMessageToEventHub(`Connected to the database!`);
         })();
     }
