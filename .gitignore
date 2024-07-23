@@ -11,12 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
-<<<<<<< HEAD
-.env
-=======
 frontend/*.env
 backend/*.env
->>>>>>> Utk-terraform-azure-pipelines
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
