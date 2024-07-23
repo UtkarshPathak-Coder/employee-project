@@ -82,7 +82,7 @@ const receiveMessagesFromServiceBusQueue = async () => {
     const messageHandler = async (messageReceived) => {
         console.log(`Received message: ${messageReceived.body}`);
         
-        // Log the message to a file
+        
         fs.appendFile('messageLogs.txt', `${new Date().toISOString()} - ${messageReceived.body}\n`, (err) => {
             if (err) {
                 console.error('Failed to write message to log file:', err);
