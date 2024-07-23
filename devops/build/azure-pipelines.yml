@@ -10,6 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+<<<<<<< HEAD
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
@@ -17,3 +18,59 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+=======
+- task: TerraformInstaller@1
+  displayName: install Tearraform
+  inputs:
+    terraformVersion: 'latest'
+
+- task: terraforminit@0
+  displayName: init Terraform 
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/compute'
+    useazurerm: true
+    azureSubscription: 'sagar-svc-conn'
+    initbackend: false
+
+
+- task: TerraformTaskV4@4
+  displayName: terraform validate
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: './devops/iac/compute/'
+
+
+
+
+- task: terraformplan@0
+  displayName: terraform Plan
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)/devops/iac/compute'
+    useazurerm: true
+    connectedServiceNameARM: 'sagar-svc-conn'
+    usevarsfile: false
+    usevars: false
+    savePlanResult: true
+    planOutput: 'tfplan'
+
+
+- task: CopyFiles@2
+  displayName: Copy .tf files
+  inputs:
+    sourceFolder: '$(System.DefaultWorkingDirectory)/devops/iac'
+    contents: |
+     **/*.tf
+     **/tfplan
+    targetFolder: '$(Build.ArtifactStagingDirectory)/tf-files'
+
+    
+    
+- task: PublishPipelineArtifact@1
+  displayName: Publish teraform .tf files
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/tf-files'
+    artifact: 'utkarsh terraform pipeline'
+    publishLocation: 'pipeline'
+    
+>>>>>>> Utk-terraform-azure-pipelines

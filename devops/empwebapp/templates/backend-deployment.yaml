@@ -14,7 +14,11 @@ spec:
     spec:
       containers:
       - name: server
+<<<<<<< HEAD
         image: utkarshpathak26/backend:20240618092509
+=======
+        image: utkarshpathak26/backend:20240718064015
+>>>>>>> Utk-terraform-azure-pipelines
         ports:
         - containerPort: 3000
         env:

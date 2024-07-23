@@ -30,6 +30,7 @@ data "azurerm_kubernetes_cluster" "aks" {
   depends_on = [azurerm_kubernetes_cluster.aks]
 }
 
+<<<<<<< HEAD
 
 resource "local_file" "kubeconfig" {
   content  = data.azurerm_kubernetes_cluster.aks.kube_config_raw
@@ -55,3 +56,5 @@ resource "null_resource" "apply_k8s_manifests" {
     local_file.kubeconfig
   ]
 }
+=======
+>>>>>>> Utk-terraform-azure-pipelines

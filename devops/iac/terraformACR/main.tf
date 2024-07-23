@@ -11,6 +11,7 @@ resource "azurerm_container_registry" "main" {
 
   admin_enabled = true
 }
+<<<<<<< HEAD
 
 resource "null_resource" "docker_login" {
   provisioner "local-exec" {
@@ -30,3 +31,5 @@ resource "null_resource" "push_images" {
     
   }
 }
+=======
+>>>>>>> Utk-terraform-azure-pipelines
