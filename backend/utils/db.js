@@ -1,5 +1,6 @@
 import pg from 'pg'
 import dotenv from "dotenv";
+import sendMessageToEventHub from '../index.js';
 dotenv.config();
 const {Pool}=pg;
  
@@ -18,6 +19,9 @@ pool.connect((err) => {
         console.error('Error connecting to the database:', err);
     } else {
         console.log('Connected to the database!');
+        (async () => {
+            await sendMessageToEventHub(`Connected to the database!`);
+        })();
     }
 });
  
