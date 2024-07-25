@@ -1,18 +1,18 @@
 module "azurerm_kubernetes_cluster" {
-    source = "../TerraformAKS"
+    source = "../modules/TerraformAKS"
     
 }
 module "azure_acr" {
-    source = "../terraformACR"
+    source = "../modules/terraformACR"
   
 }
 
 module "service_bus" {
-    source = "../service bus"
+    source = "../modules/service bus"
     
 }
 
 module "event_hub" {
-    source = "../eventHub"
+    source = "../modules/eventHub"
   
 }
