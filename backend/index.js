@@ -80,7 +80,7 @@ const sender= servicebusclient.createSender(queuename);
 const receiveMessagesFromServiceBusQueue = async () => {
     const receiver = servicebusclient.createReceiver(queuename);
     const messageHandler = async (messageReceived) => {
-        console.log(`Received message: ${messageReceived.body}`);
+        console.log(`Received message from service bus queue: ${messageReceived.body}`);
         
         
         fs.appendFile('messageLogs.txt', `${new Date().toISOString()} - ${messageReceived.body}\n`, (err) => {
@@ -120,10 +120,13 @@ const receiveMessagesFromEventHub = async () => {
 
     const subscription = consumerClient.subscribe({
         processEvents: async (events, context) => {
-            
+            if (events.length === 0) {
+                console.log(`No events received within wait time. Waiting for next interval`);
+                return;
+            }
 
             for (const event of events) {
-                console.log(`Received event: '${event.body}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`);
+                console.log(`Received event from event hub: '${event.body}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`);
                 fs.appendFile('eventLogs.txt', `${new Date().toISOString()} - ${event.body}\n`, (err) => {
                     if (err) {
                         console.error('Failed to write event to event log file:', err);

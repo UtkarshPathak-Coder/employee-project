@@ -1,6 +1,2 @@
-2024-07-23T09:00:01.077Z - Connected to the database!
-2024-07-23T09:00:01.584Z - Server running on port 3000
-2024-07-23T09:02:20.970Z - Connected to the database!
-2024-07-23T09:02:21.423Z - Server running on port 3000
-2024-07-23T10:40:10.434Z - Connected to the database!
-2024-07-23T10:40:10.991Z - Server running on port 3000
+2024-07-25T04:27:35.408Z - Connected to the database!
+2024-07-25T04:27:35.939Z - Server running on port 3000
