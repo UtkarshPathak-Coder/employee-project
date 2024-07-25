@@ -13,6 +13,7 @@ variable "location" {
 variable "sku" {
   description = "The SKU of the Service Bus namespace."
   type        = string
+  default = "Basic"
 }
 
 variable "queue_name" {

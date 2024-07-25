@@ -1,6 +1,3 @@
-provider "azurerm" {
-    features {}
-}
 data "azurerm_resource_group" "existing" {
   name = "Utkarsh-Pathak-rg" 
 }
