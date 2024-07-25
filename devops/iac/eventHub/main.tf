@@ -24,7 +24,7 @@ resource "azurerm_eventhub_consumer_group" "consumer_group" {
   eventhub_name       = azurerm_eventhub.eventhub.name
 }
 resource "azurerm_eventhub_authorization_rule" "send_listen_rule" {
-  name                = "${var.eventhub_name}-send-listen-rule"
+  name                = "receive-from-app"
   namespace_name      = azurerm_eventhub_namespace.ehub.name
   resource_group_name = data.azurerm_resource_group.existing.name
   eventhub_name       = azurerm_eventhub.eventhub.name

@@ -14,7 +14,7 @@ resource "azurerm_servicebus_queue" "queue" {
   namespace_id      = azurerm_servicebus_namespace.sb.id
 }
 resource "azurerm_servicebus_queue_authorization_rule" "send_listen_policy" {
-  name                = "send-listen-policy"
+  name                = "utk-queue-policy"
   queue_id          = azurerm_servicebus_queue.queue.id
   listen              = true
   send                = true
