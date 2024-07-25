@@ -1,2 +1,0 @@
-2024-07-25T04:27:35.408Z - Connected to the database!
-2024-07-25T04:27:35.939Z - Server running on port 3000
