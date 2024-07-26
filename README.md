@@ -1,8 +1,5 @@
-Sure, here's a sample `README.md` for the root directory of your project:
 
----
-
-# Employee MAnagement System
+# Employee Management System
 
 Welcome to the Project! This repository contains the backend, frontend, and database setup for the application.
 
