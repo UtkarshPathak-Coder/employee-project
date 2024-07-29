@@ -1,5 +1,6 @@
-
 # Employee Management System
+
+
 
 Welcome to the Project! This repository contains the backend, frontend, and database setup for the application.
 
@@ -41,7 +42,5 @@ The PostgreSQL database setup instructions can be found in the `database` direct
    - For frontend setup, navigate to the `frontend` directory and follow the instructions in the [frontend/README.md](./frontend/README.md).
    - For database setup, navigate to the `database` directory and follow the instructions in the [database/README.md](./database/README.md).
 
-## License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
 
