@@ -120,7 +120,10 @@ const receiveMessagesFromEventHub = async () => {
 
     const subscription = consumerClient.subscribe({
         processEvents: async (events, context) => {
-            
+            if (events.length === 0) {
+                console.log(`No events received within wait time. Waiting for next interval`);
+                return;
+            }
 
             for (const event of events) {
                 console.log(`Received event: '${event.body}' from partition: '${context.partitionId}' and consumer group: '${context.consumerGroup}'`);
@@ -139,7 +142,7 @@ const receiveMessagesFromEventHub = async () => {
         processError: async (err, context) => {
             console.log(`Error occurred: ${err}`);
         }
-    }, { startPosition: latestEventPosition });
+    }, { startPosition: earliestEventPosition });
 
     console.log(`Listening for events on ${eventHubName} with consumer group ${consumerGroupName}`);
 

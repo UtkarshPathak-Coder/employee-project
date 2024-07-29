@@ -1,5 +1,6 @@
+# Employee Management System
 
-# Emplpyee Management System
+
 
 Welcome to the Project! This repository contains the backend, frontend, and database setup for the application.
 
@@ -28,12 +29,10 @@ The frontend setup instructions can be found in the `frontend` directory. Please
 The PostgreSQL database setup instructions can be found in the `database` directory. Please refer to the [database/README.md](./database/README.md) for detailed instructions on setting up the PostgreSQL database.
 
 
-## Setting Up the Project
-
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/your-username/project-name.git
+   git clone [https://github.com/your-username/project-name.git](https://github.com/UtkarshPathak-Coder/employee-project.git)
    cd project-name
    ```
 
@@ -42,4 +41,6 @@ The PostgreSQL database setup instructions can be found in the `database` direct
    - For backend setup, navigate to the `backend` directory and follow the instructions in the [backend/README.md](./backend/README.md).
    - For frontend setup, navigate to the `frontend` directory and follow the instructions in the [frontend/README.md](./frontend/README.md).
    - For database setup, navigate to the `database` directory and follow the instructions in the [database/README.md](./database/README.md).
+
+
 
