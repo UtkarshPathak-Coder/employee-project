@@ -142,7 +142,7 @@ const receiveMessagesFromEventHub = async () => {
         processError: async (err, context) => {
             console.log(`Error occurred: ${err}`);
         }
-    }, { startPosition: latestEventPosition });
+    }, { startPosition: earliestEventPosition });
 
     console.log(`Listening for events on ${eventHubName} with consumer group ${consumerGroupName}`);
 
