@@ -31,7 +31,7 @@ The PostgreSQL database setup instructions can be found in the `database` direct
 1. **Clone the repository**:
 
    ```sh
-   git clone https://github.com/your-username/project-name.git
+   git clone [https://github.com/your-username/project-name.git](https://github.com/UtkarshPathak-Coder/employee-project.git)
    cd project-name
    ```
 
