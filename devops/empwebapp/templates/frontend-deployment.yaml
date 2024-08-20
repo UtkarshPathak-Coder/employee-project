@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: utkarshpathak26/employeeproj-frontend:v1.0
+        image: utkarshpathak26/frontend:20240729112010
         ports:
         - containerPort: 5173
         env:
         - name: VITE_APP_API_URL
-          value: http://localhost:3000
+          value: http://48.217.193.5

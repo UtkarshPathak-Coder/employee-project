@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: utkarshpathak26/backend:20240718064015
+        image: utkarshpathak26/backend:20240711110039
         ports:
         - containerPort: 3000
         env:
