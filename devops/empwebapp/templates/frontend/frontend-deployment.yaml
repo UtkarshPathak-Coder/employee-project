@@ -19,4 +19,4 @@ spec:
         - containerPort: 5173
         env:
         - name: VITE_APP_API_URL
-          value: http://48.217.193.5
+          value: http://48.217.193.5.traefik.me

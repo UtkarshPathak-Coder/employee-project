@@ -1,13 +1,67 @@
-.loginPage{
-    background: url('images/OIP.jfif');
-    background: linear-gradient( rgba(11,11,11,0.5), rgba(10,10,10,0.5),url('images/OIP.jfif'));
-    background-color: cornflowerblue;  
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 120%;
+/* Background and Container */
+.loginPage {
+    background: linear-gradient(to right, #00aaff, #004e92); /* Beautiful gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.loginForm
-{
-    background-color: rgba(1, 32, 93, 0.6);
-    color: azure;
+
+.loginForm {
+    background: rgba(255, 255, 255, 0.9); /* Lighter background for the form */
+    color: #333;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.loginForm:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.loginForm h2 {
+    margin-bottom: 24px;
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.form-label {
+    color: #555;
+    font-weight: 500;
+}
+
+.form-control {
+    background-color: #f9f9f9; /* Lighter background for input fields */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    color: #333;
+    font-size: 16px;
+}
+
+.form-control:focus {
+    border-color: #76c7c0; /* Lighter focus color */
+    outline: none;
+    box-shadow: 0 0 5px rgba(118, 199, 192, 0.5);
+}
+
+.btn-success {
+    background-color: #76c7c0; /* Matching button color */
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #5baea1;
+    transform: translateY(-2px);
 }
