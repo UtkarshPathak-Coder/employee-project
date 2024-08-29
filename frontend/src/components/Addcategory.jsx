@@ -20,9 +20,20 @@ const Addcategory = ({ onClose }) =>{
             }
         })
         .catch(err=>console.log(err))
+        
     }
+    const customStyles = {
+        overlay: {
+            backdropFilter: 'blur(20px)', // Apply blur effect to the background
+        },
+    };
   return (
-    <Modal isOpen={true} onRequestClose={onClose} className='w-60 h-60 justify-content-center p-5'>
+    <Modal 
+            isOpen={true} 
+            onRequestClose={onClose} 
+            style={customStyles} 
+            className='w-60 h-60 justify-content-center p-5'
+        >
     <div className='d-flex justify-content-center align-items-center h-75 '>
     <div className='p-5 rounded w-50 border '>
         
